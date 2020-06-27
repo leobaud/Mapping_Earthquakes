@@ -18,13 +18,13 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 // Create a base layer that holds both maps.
 let baseMaps = {
   "Streets": streets,
-  "Satellite Streets": satelliteStreets
+  "Satellite": satelliteStreets
 };
 
 // Create the map object with a center and zoom level.
 let map = L.map('mapid', {
-  center: [43.7, -79.3], 
-  zoom: 11,
+  center: [39.5, -98.5], 
+  zoom: 3,
   layers: [streets]
 });
 
@@ -35,7 +35,7 @@ L.control.layers(baseMaps).addTo(map);
 streets.addTo(map);
 
 // Accessing the Toronto airline routes GeoJSON URL.
-let torontoHoods = "https://raw.githubusercontent.com/leobaud/Mapping_Earthquakes/master/torontoNeighborhoods.json";
+let earthQuakes = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 // Create a style for the lines.
 let myStyle = {
@@ -46,14 +46,14 @@ let myStyle = {
 }
 
 // Grabbing our GeoJSON data.
-d3.json(torontoHoods).then(function(data) {
+d3.json(earthQuakes).then(function(data) {
   console.log(data);
 // Creating a GeoJSON layer with the retrieved data.
 L.geoJSON(data, {
   style: myStyle,
 // We turn each feature into a marker on the map.
     	onEachFeature: function(feature, layer) {
-          console.log(layer);
+          // console.log(layer);
         layer.bindPopup("<h2> Neighborhood: " + feature.properties.AREA_NAME + "</h2>")
         //<hr> <h3> Destination: " + feature.properties.dst + "</h3>" )
       }
