@@ -82,6 +82,8 @@ L.geoJSON(data, {
         //<hr> <h3> Destination: " + feature.properties.dst + "</h3>" )
       }
         }).addTo(tecPlates);
+
+        tecPlates.addTo(map)
   });
 
 // Grabbing our GeoJSON data.
@@ -144,6 +146,7 @@ L.geoJson(data, {
           layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
         }
       }).addTo(earthquakes);
+      earthquakes.addTo(map);
 
       // Create a legend control object.
       let legend = L.control({
